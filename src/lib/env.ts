@@ -56,13 +56,25 @@ function missingMessage(issues: z.ZodIssue[]): string {
   ].join("\n");
 }
 
+/**
+ * Resolve public Supabase env for browser + server.
+ * IMPORTANT: use static `process.env.NEXT_PUBLIC_*` access so Next.js can
+ * inline values into the client bundle (dynamic keys are undefined in browser).
+ */
 function resolvePublicInput() {
+  const url =
+    process.env.NEXT_PUBLIC_SUPABASE_URL?.trim() ||
+    process.env.SUPABASE_URL?.trim() ||
+    undefined;
+  const anonKey =
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim() ||
+    process.env.SUPABASE_ANON_KEY?.trim() ||
+    process.env.SUPABASE_ANON_PUBLICK_KEY?.trim() ||
+    undefined;
+
   return {
-    NEXT_PUBLIC_SUPABASE_URL: readEnv("NEXT_PUBLIC_SUPABASE_URL", ["SUPABASE_URL"]),
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: readEnv("NEXT_PUBLIC_SUPABASE_ANON_KEY", [
-      "SUPABASE_ANON_KEY",
-      "SUPABASE_ANON_PUBLICK_KEY",
-    ]),
+    NEXT_PUBLIC_SUPABASE_URL: url,
+    NEXT_PUBLIC_SUPABASE_ANON_KEY: anonKey,
   };
 }
 

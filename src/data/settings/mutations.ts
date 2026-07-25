@@ -17,6 +17,7 @@ export async function updateProfileDisplayNameAction(displayName: string) {
     .eq("id", profile.id);
   if (error) throw new Error(mapDatabaseError(error));
   revalidatePath("/settings");
+  revalidatePath("/", "layout");
   return { ok: true as const };
 }
 

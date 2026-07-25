@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import { PageHeader } from "@/components/layout/page-header";
 import { Button } from "@/components/ui/button";
@@ -75,10 +76,34 @@ export function SettingsClient({
   };
   exchangeRate: ExchangeRate;
 }) {
+  const router = useRouter();
   const { currentUser, setCurrentUserId, isDevUserSwitcherEnabled, savingsPlanMode, setSavingsPlanMode } = useApp();
   const { theme, setTheme } = useTheme();
+  const [displayName, setDisplayName] = useState(profile.display_name);
+  const [profileMessage, setProfileMessage] = useState<string | null>(null);
+  const [profileSaving, setProfileSaving] = useState(false);
   const [assumptionMessage, setAssumptionMessage] = useState<string | null>(null);
   const [passwordState, passwordAction, passwordPending] = useActionState(updatePassword, {} as AuthActionState);
+
+  async function saveDisplayName() {
+    const trimmed = displayName.trim();
+    if (!trimmed) {
+      setProfileMessage("Display name cannot be empty.");
+      return;
+    }
+
+    setProfileSaving(true);
+    setProfileMessage(null);
+    try {
+      await updateProfileDisplayNameAction(trimmed);
+      setProfileMessage("Display name saved.");
+      router.refresh();
+    } catch (e) {
+      setProfileMessage(e instanceof Error ? e.message : "Unable to save display name.");
+    } finally {
+      setProfileSaving(false);
+    }
+  }
 
   async function saveAssumptions(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -156,12 +181,25 @@ export function SettingsClient({
             <div className="grid gap-3 sm:grid-cols-2">
               <div className="space-y-1.5">
                 <Label htmlFor="name">Display name</Label>
-                <Input id="name" defaultValue={currentUser.name} />
+                <Input
+                  id="name"
+                  value={displayName}
+                  onChange={(e) => setDisplayName(e.target.value)}
+                  autoComplete="name"
+                />
               </div>
               <div className="space-y-1.5">
                 <Label htmlFor="email">Email</Label>
-                <Input id="email" defaultValue={currentUser.email} />
+                <Input id="email" value={currentUser.email} readOnly />
               </div>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+              <Button type="button" onClick={() => void saveDisplayName()} disabled={profileSaving}>
+                {profileSaving ? "Saving…" : "Save display name"}
+              </Button>
+              {profileMessage ? (
+                <p className="text-sm text-muted-foreground">{profileMessage}</p>
+              ) : null}
             </div>
           </CardContent>
         </Card>
