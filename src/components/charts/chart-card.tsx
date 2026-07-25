@@ -37,7 +37,7 @@ export function ChartCard({
   action,
 }: ChartCardProps) {
   return (
-    <Card className={cn("min-w-0 border-border bg-surface shadow-[var(--shadow-xs)]", className)}>
+    <Card className={cn("min-w-0 border-[var(--glass-border)] bg-[var(--surface)] shadow-[var(--shadow-sm)] backdrop-blur-[var(--glass-blur)]", className)}>
       <CardHeader className="flex flex-row items-start justify-between space-y-0 p-5 pb-2">
         <div>
           <CardTitle className="text-base font-semibold">{title}</CardTitle>

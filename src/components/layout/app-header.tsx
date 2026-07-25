@@ -82,7 +82,7 @@ export function AppHeader({ initialUnreadCount = 0 }: { initialUnreadCount?: num
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex h-[var(--header-height)] items-center gap-3 border-b border-border bg-background/95 px-4 backdrop-blur-sm sm:px-6 lg:px-9">
+      <header className="sticky top-0 z-30 flex h-[var(--header-height)] items-center gap-3 border-b border-[var(--glass-border)] bg-[var(--surface)]/80 px-4 backdrop-blur-[var(--glass-blur)] sm:px-6 lg:px-9">
         <Button
           variant="ghost"
           size="icon-sm"
@@ -100,7 +100,7 @@ export function AppHeader({ initialUnreadCount = 0 }: { initialUnreadCount?: num
         <div className="hidden items-center gap-2 md:flex">
           {pathname.startsWith("/dashboard") ? (
             <div
-              className="inline-flex rounded-md bg-background-subtle p-0.5"
+              className="inline-flex rounded-lg border border-[var(--glass-border)] bg-[var(--surface)] p-0.5 backdrop-blur-[var(--glass-blur)]"
               role="group"
               aria-label="Dashboard mode"
             >
@@ -110,7 +110,7 @@ export function AppHeader({ initialUnreadCount = 0 }: { initialUnreadCount?: num
                 className={cn(
                   "rounded-md px-3 py-1.5 text-xs font-medium transition-colors duration-[var(--duration-normal)]",
                   dashboardMode === "combined"
-                    ? "bg-surface text-foreground shadow-[var(--shadow-xs)]"
+                    ? "bg-[var(--surface-raised)] text-foreground shadow-[var(--shadow-xs)]"
                     : "text-foreground-muted hover:text-foreground"
                 )}
               >
@@ -122,7 +122,7 @@ export function AppHeader({ initialUnreadCount = 0 }: { initialUnreadCount?: num
                 className={cn(
                   "rounded-md px-3 py-1.5 text-xs font-medium transition-colors duration-[var(--duration-normal)]",
                   dashboardMode === "personal"
-                    ? "bg-surface text-foreground shadow-[var(--shadow-xs)]"
+                    ? "bg-[var(--surface-raised)] text-foreground shadow-[var(--shadow-xs)]"
                     : "text-foreground-muted hover:text-foreground"
                 )}
               >

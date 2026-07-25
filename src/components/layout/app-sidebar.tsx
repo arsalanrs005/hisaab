@@ -23,7 +23,7 @@ import type { WorkspaceContext } from "@/data/workspaces/types";
 function HisabLogo({ collapsed, workspaceName }: { collapsed?: boolean; workspaceName?: string }) {
   return (
     <Link href="/dashboard" className="flex min-w-0 items-center gap-2.5">
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-primary text-sm font-semibold text-primary-foreground">
+      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-sm font-semibold text-primary-foreground shadow-[var(--shadow-glow)]">
         H
       </div>
       {!collapsed ? (
@@ -59,7 +59,7 @@ export function AppSidebar({
   return (
     <aside
       className={cn(
-        "fixed inset-y-0 left-0 z-40 hidden flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground transition-[width] duration-[var(--duration-normal)] ease-[var(--ease-out)] lg:flex",
+        "fixed inset-y-0 left-0 z-40 hidden flex-col border-r border-sidebar-border bg-sidebar text-sidebar-foreground backdrop-blur-[var(--glass-blur)] transition-[width] duration-[var(--duration-normal)] ease-[var(--ease-out)] lg:flex",
         sidebarCollapsed ? "w-[var(--sidebar-collapsed)]" : "w-[var(--sidebar-width)]"
       )}
     >
@@ -112,8 +112,8 @@ export function AppSidebar({
                         "group relative flex items-center gap-2.5 rounded-md px-2.5 py-2 text-sm transition-colors duration-[var(--duration-normal)]",
                         sidebarCollapsed && "justify-center px-0",
                         active
-                          ? "bg-sidebar-accent font-medium text-sidebar-accent-foreground"
-                          : "text-foreground-muted hover:bg-surface-hover hover:text-foreground"
+                          ? "bg-sidebar-accent font-medium text-sidebar-accent-foreground shadow-[inset_0_1px_0_rgba(255,255,255,0.06)]"
+                          : "text-foreground-muted hover:bg-[var(--surface-hover)] hover:text-foreground"
                       )}
                     >
                       {active && !sidebarCollapsed ? (
@@ -207,7 +207,7 @@ export function WorkspaceSwitcher({ workspace }: { workspace?: WorkspaceContext 
   }
 
   return (
-    <div className="rounded-md bg-background-subtle px-3 py-2.5">
+    <div className="rounded-lg border border-[var(--glass-border)] bg-[var(--surface)] px-3 py-2.5 backdrop-blur-[var(--glass-blur)]">
       <p className="text-[11px] font-medium uppercase tracking-[0.06em] text-foreground-faint">Workspace</p>
       <p className="mt-0.5 text-sm font-medium text-foreground">{workspace.name}</p>
       <p className="text-xs text-foreground-muted">

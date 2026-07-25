@@ -25,7 +25,7 @@ export function AppShell({
 
   return (
     <TooltipProvider delayDuration={200}>
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-transparent">
         <AppSidebar
           initialWorkspace={initialWorkspace}
           initialUnreadCount={initialUnreadNotificationCount}

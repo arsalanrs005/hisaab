@@ -9,12 +9,12 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default:
-          "bg-primary text-primary-foreground hover:bg-[var(--primary-hover)]",
+          "bg-primary text-primary-foreground shadow-[var(--shadow-sm)] hover:bg-[var(--primary-hover)] hover:shadow-[var(--shadow-glow)]",
         secondary:
-          "border border-border bg-surface text-foreground hover:bg-surface-hover",
+          "border border-[var(--glass-border)] bg-[var(--surface)] text-foreground backdrop-blur-[var(--glass-blur)] hover:bg-[var(--surface-hover)] hover:border-[var(--glass-border-strong)]",
         outline:
-          "border border-border bg-transparent text-foreground hover:bg-surface-hover",
-        ghost: "text-foreground-secondary hover:bg-surface-hover hover:text-foreground",
+          "border border-[var(--glass-border)] bg-transparent text-foreground hover:bg-[var(--surface-hover)] hover:border-[var(--glass-border-strong)]",
+        ghost: "text-foreground-secondary hover:bg-[var(--surface-hover)] hover:text-foreground",
         danger:
           "bg-danger text-danger-foreground hover:bg-danger/90",
         success:

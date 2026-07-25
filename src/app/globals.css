@@ -6,6 +6,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-background-subtle: var(--background-subtle);
+  --color-background-elevated: var(--background-elevated);
   --color-surface: var(--surface);
   --color-surface-raised: var(--surface-raised);
   --color-surface-hover: var(--surface-hover);
@@ -77,14 +78,19 @@
     font-feature-settings: "tnum" 1, "lnum" 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-image:
+      radial-gradient(ellipse 80% 50% at 50% -20%, rgba(99, 91, 255, 0.12), transparent 70%),
+      radial-gradient(ellipse 50% 40% at 100% 0%, rgba(99, 91, 255, 0.06), transparent 60%),
+      radial-gradient(ellipse 40% 30% at 0% 100%, rgba(99, 91, 255, 0.04), transparent 50%);
+    background-attachment: fixed;
   }
 
   h1 {
-    @apply text-[28px] font-semibold leading-[34px] tracking-tight text-foreground;
+    @apply text-[28px] font-semibold leading-[34px] tracking-[-0.02em] text-foreground;
   }
 
   h2 {
-    @apply text-lg font-semibold leading-[26px] tracking-tight text-foreground;
+    @apply text-lg font-semibold leading-[26px] tracking-[-0.01em] text-foreground;
   }
 
   h3 {
@@ -121,29 +127,54 @@
     margin-inline: auto;
   }
 
+  .surface-glass {
+    border: 1px solid var(--glass-border);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+
+  .surface-glass-raised {
+    border: 1px solid var(--glass-border);
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
+  }
+
   .surface-card {
-    @apply rounded-lg border border-border bg-card text-card-foreground;
-    box-shadow: var(--shadow-xs);
+    @apply rounded-lg text-card-foreground;
+    border: 1px solid var(--glass-border);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
   }
 
   .surface-card-interactive {
-    @apply rounded-lg border border-border bg-card text-card-foreground transition-[box-shadow,background-color,border-color];
-    box-shadow: var(--shadow-xs);
+    @apply rounded-lg text-card-foreground transition-[box-shadow,background-color,border-color,transform];
+    border: 1px solid var(--glass-border);
+    background: var(--surface);
+    box-shadow: var(--shadow-sm);
+    backdrop-filter: blur(var(--glass-blur));
+    -webkit-backdrop-filter: blur(var(--glass-blur));
     transition-duration: var(--duration-normal);
     transition-timing-function: var(--ease-out);
   }
 
   .surface-card-interactive:hover {
-    @apply bg-surface-hover;
-    box-shadow: var(--shadow-sm);
+    background: var(--surface-hover);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--shadow-md);
   }
 
   .metric-value {
-    @apply text-[28px] font-semibold leading-9 tabular-nums tracking-tight text-foreground;
+    @apply text-[28px] font-semibold leading-9 tabular-nums tracking-[-0.02em] text-foreground;
   }
 
   .metric-value-sm {
-    @apply text-xl font-semibold leading-[30px] tabular-nums tracking-tight text-foreground;
+    @apply text-xl font-semibold leading-[30px] tabular-nums tracking-[-0.02em] text-foreground;
   }
 
   .section-gap {
@@ -152,5 +183,16 @@
 
   .data-table-row {
     @apply h-11 border-b border-border-subtle transition-colors hover:bg-surface-hover;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, #fafafa 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .glow-primary {
+    box-shadow: var(--shadow-glow);
   }
 }
