@@ -375,6 +375,7 @@ export interface Database {
           id: string;
           name: string;
           owner_profile_id: string | null;
+          workspace_id: string;
           source_type: string | null;
           expected_currency: string;
           default_expected_amount: number | null;
@@ -391,6 +392,7 @@ export interface Database {
           id?: string;
           name: string;
           owner_profile_id?: string | null;
+          workspace_id?: string;
           source_type?: string | null;
           expected_currency?: string;
           default_expected_amount?: number | null;
@@ -407,6 +409,7 @@ export interface Database {
           id?: string;
           name?: string;
           owner_profile_id?: string | null;
+          workspace_id?: string;
           source_type?: string | null;
           expected_currency?: string;
           default_expected_amount?: number | null;
