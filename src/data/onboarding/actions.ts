@@ -46,6 +46,7 @@ export async function completeOnboardingAction(raw: OnboardingSubmitInput) {
       name: account.name.trim(),
       bank_name: account.bankName.trim(),
       owner_profile_id: profile.id,
+      workspace_id: workspace.id,
       account_type: isShared ? "savings" : "current",
       primary_currency: "PKR",
       opening_balance: toDbMoney(opening),
@@ -66,6 +67,7 @@ export async function completeOnboardingAction(raw: OnboardingSubmitInput) {
     const { error } = await supabase.from("income_sources").insert({
       name: source.name.trim(),
       owner_profile_id: source.isShared ? null : profile.id,
+      workspace_id: workspace.id,
       expected_currency: source.currency,
       default_expected_amount: amount && amount > 0 ? toDbMoney(amount) : null,
       payment_frequency: source.frequency || null,

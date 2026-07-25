@@ -19,6 +19,9 @@ export function mapDatabaseError(error: { message?: string; code?: string }): st
   if (message.includes("duplicate key") || message.includes("accounts_owner_bank_name_unique")) {
     return "An account with this bank and name already exists.";
   }
+  if (message.includes("function") && message.includes("is not unique")) {
+    return "A database function conflict blocked this save. Please contact support if this persists.";
+  }
   if (message.includes("JWT") || message.includes("not authenticated")) {
     return "Your session expired. Please sign in again.";
   }
